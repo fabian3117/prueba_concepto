@@ -17,7 +17,6 @@ public class PlanesController {
     private final PlanesService planesService;
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-
     private PlanesModel GetPlaneById(@PathVariable("id") @NonNull String id) {
         return planesService.getPlanesById(id);
     }
