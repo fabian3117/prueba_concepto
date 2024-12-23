@@ -1,5 +1,6 @@
 package com.example.backbase.controllers;
 
+import com.example.backbase.dtos.PlanDTO;
 import com.example.backbase.models.PlanesModel;
 import com.example.backbase.services.PlanesService;
 import lombok.NonNull;
@@ -10,20 +11,36 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/planes")
 @RequiredArgsConstructor
 public class PlanesController {
 
     private final PlanesService planesService;
+
+    /**
+     * Obtencion de plan asociado a cliente
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     private PlanesModel GetPlaneById(@PathVariable("id") @NonNull String id) {
         return planesService.getPlanesById(id);
     }
+
+
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    private List<PlanesModel> GetPlanes(){
-        return planesService.getAllPlanes();
-    }
+    private PlanDTO GetPlanUser(@RequestAttribute("userId")Long userId) {
 
+        return planesService.getPlanOfUser(userId);
+    }
+//--->  Ahora el cliente quiere comprar un plan <---
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+
+    public void BuyPlane(@PathVariable("id") @NonNull String id, @RequestBody PlanDTO plan) {
+
+    }
 }
+

@@ -24,4 +24,5 @@ public class ClienteModel {
     private String apellido;
     private Date fecha_alta;
     private Date fecha_creacion;
+    private String plan_asociado;
 }

@@ -17,6 +17,8 @@ public class PlanesModel {
     private String id;  //--->  ID de cada plan <---
     private String name;
 
+    //--->
+    private Long user;
     private int price;
 
 }
