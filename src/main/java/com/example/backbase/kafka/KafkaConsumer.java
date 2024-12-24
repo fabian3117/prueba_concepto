@@ -11,7 +11,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/*
 @Configuration
 @EnableKafka
 public class KafkaConsumer {
@@ -30,3 +30,6 @@ public class KafkaConsumer {
         return new DefaultKafkaConsumerFactory<>(props);
     }
 }
+
+
+ */

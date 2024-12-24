@@ -5,20 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
-@Builder
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteDTO {
-
+public class RegisterDTO {
+    private String email;
+    private String username;
+    private String password;
     private String nombre;
     private String apellido;
-    private Date fecha_alta;
-    private Date fecha_creacion;
     private String plan_asociado;
-    private Long userId;
-    private String password;
-
 }

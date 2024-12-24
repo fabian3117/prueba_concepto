@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -20,5 +23,9 @@ public class ClienteService {
     public ClienteDTO getClienteById(@NonNull Long id) {
 
         return clientesRepository.findById(id).stream().map(clienteMapper::ClienteEntityToDTO).findFirst().orElse(new ClienteDTO());
+    }
+
+    public List<ClienteDTO> getAllClients() {
+        return clientesRepository.findAll().stream().map(clienteMapper::ClienteEntityToDTO).collect(Collectors.toList());
     }
 }

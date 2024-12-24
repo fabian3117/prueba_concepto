@@ -27,6 +27,11 @@ public class PlanesController {
     private PlanesModel GetPlaneById(@PathVariable("id") @NonNull String id) {
         return planesService.getPlanesById(id);
     }
+    @PostMapping("/created")
+    @ResponseStatus(HttpStatus.OK)
+    private void CreatePlane(@RequestBody @NonNull PlanDTO plan) {
+        planesService.createNewPlan(plan);
+    }
 
 
     @GetMapping("/")
