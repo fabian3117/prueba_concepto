@@ -21,7 +21,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        request.setAttribute("userId",250);
+        request.setAttribute("userId",1);
         filterChain.doFilter(request, response);
     }
 }

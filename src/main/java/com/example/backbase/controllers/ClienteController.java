@@ -24,5 +24,6 @@ private final ClienteService clienteService;
     private List<ClienteDTO> getAllClientes() {
         return clienteService.getAllClients();
     }
+
 //    @GetMapping("/")
 }

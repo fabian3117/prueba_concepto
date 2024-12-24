@@ -8,4 +8,5 @@ import org.mapstruct.Mapper;
 public interface PlanesMapper {
     PlanDTO PlanModelToPlanDTO(PlanesModel plan);
 
+    PlanesModel PlanDTOToPlanModel(PlanDTO plan);
 }

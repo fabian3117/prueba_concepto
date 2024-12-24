@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-/*
+
 @Component
 @Slf4j
 public class KafkaLister {
@@ -18,6 +18,3 @@ public class KafkaLister {
         System.out.println(data);
     }
 }
-
-
- */

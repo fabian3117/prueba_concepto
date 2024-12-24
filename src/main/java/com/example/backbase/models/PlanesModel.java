@@ -1,8 +1,8 @@
 package com.example.backbase.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.backbase.interceptorsJPA.ClienteInterceptorJPA;
+import com.example.backbase.interceptorsJPA.PlanesIncerceptorJPA;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Builder
@@ -11,10 +11,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table
+@EntityListeners(PlanesIncerceptorJPA.class)
+
 public class PlanesModel {
 
     @Id
-    private String id;  //--->  ID de cada plan <---
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;  //--->  ID de cada plan <---
     private String name;
 
     //--->
