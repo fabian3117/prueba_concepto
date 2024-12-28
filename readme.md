@@ -1,6 +1,18 @@
 
+## Build
+Correr usando dockerfile
+
+Construir imagen,
+```bash
+docker build -t BackBase .
+```
+Correr imagen
+```bash
+docker run -p 8080:8080 -d BackBase
+```
 
 ## Descripcion de arquitectura
+
 ```mermaid
 
 sequenceDiagram

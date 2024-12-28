@@ -46,7 +46,7 @@ public class PlanesService {
     }
 
     //TODO implementar notificacion via kafka para notificar a los otros micros <---
-    public void updatePlan(@NonNull PlanDTO plan, @NonNull Long id) {
+    public String updatePlan(@NonNull PlanDTO plan, @NonNull Long id) {
 
         List<PlanesModel> byName = planesRepository.findByName(plan.getName());
         if(byName.size()!=1){
@@ -55,6 +55,22 @@ public class PlanesService {
 
 //        PlanesModel entity = planesRepository.findByName((plan.getName()));
 
-        clienteService.updateClient(id,byName.get(0).getId());
+        //--->  Al realizar la actualizacion se verifica si puede pagarlo y se genera la factura asociada
+        //TODO falta terminar este flujo
+
+        switch (clienteService.updateClient(id,byName.get(0).getId())){
+            case FAIL ->
+            {
+                return "Fail update payment data";
+            }
+            case OK ->
+            {
+                return "Success update payment data";
+            }
+            case PENDING -> {
+                return "Pending update payment data. When finish send mail :D";
+            }
+            default -> throw new RuntimeException("Plan fail");
+        }
     }
 }
