@@ -53,6 +53,17 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
+  mongo-db:
+    image : mongo:6.0.6
+    restart : always
+    environment :
+      MONGO_INITDB_ROOT_USERNAME: mongo-user
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+      - ./mongo:/data/db
+    ports:
+      - "27017:27017"
+
 
 networks:
   mi_red:
