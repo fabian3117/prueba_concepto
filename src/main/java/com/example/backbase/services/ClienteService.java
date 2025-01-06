@@ -24,6 +24,11 @@ public class ClienteService {
     @Autowired
     private PaymentService paymentService;
 
+    /**
+     * Obtencion de la informacion de un cliente
+     * @param id
+     * @return
+     */
     public ClienteDTO getClienteById(@NonNull Long id) {
 
         return clientesRepository.findById(id).stream().map(clienteMapper::ClienteEntityToDTO).findFirst().orElse(new ClienteDTO());

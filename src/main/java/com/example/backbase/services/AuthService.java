@@ -70,7 +70,6 @@ public class AuthService implements AuthInterface {
      */
     @Override
     public String createNewUser(RegisterDTO register) {
-        //TODO INCORPORACION DE TOPICO KAFKA
         if(clientesRepository.existsByEmail(register.getEmail())){
             throw new RuntimeException("Email already in use");
 
