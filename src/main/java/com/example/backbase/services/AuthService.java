@@ -1,8 +1,11 @@
 package com.example.backbase.services;
 
+import com.example.backbase.dtos.BodyMail;
 import com.example.backbase.dtos.LoginDTO;
 import com.example.backbase.dtos.RegisterDTO;
 import com.example.backbase.interfaces.AuthInterface;
+import com.example.backbase.kafka.mails.KafkaProducterMails;
+import com.example.backbase.kafka.mails.KafkaProducterMailsSender;
 import com.example.backbase.mappers.ClienteMapper;
 import com.example.backbase.mappers.RegisterMapper;
 import com.example.backbase.models.ClienteModel;
@@ -29,14 +32,15 @@ public class AuthService implements AuthInterface {
     @Autowired
     private RegisterMapper registerMapper;
 
-
+    @Autowired
+    private KafkaProducterMailsSender kafkaProducterMailsSender;
 
     public String autheUser(@NonNull LoginDTO loginDTO) {
-
-        List<ClienteModel> clientesl=clientesRepository.findByEmail(loginDTO.getEmail());
-        if(clientesl.size() != 1){
+        if(clientesRepository.countAllByEmail(loginDTO.getEmail()) != 1){
             throw new RuntimeException("Error user don't exist or is repead");
         }
+        List<ClienteModel> clientesl=clientesRepository.findByEmail(loginDTO.getEmail());
+
 
         //--->  El cliente existe <---
         //--->  Ahora tengo que verificar la clave y en caso correcto generar un token  <---
@@ -67,15 +71,27 @@ public class AuthService implements AuthInterface {
     @Override
     public String createNewUser(RegisterDTO register) {
         if(clientesRepository.existsByEmail(register.getEmail())){
-            new RuntimeException("Email already in use");
+            throw new RuntimeException("Email already in use");
 
         }
         ClienteModel datosGuardados=clientesRepository.save(clienteMapper.RegisterDTOToClienteModel(register));
 
+        BodyMail correo= BodyMail.builder()
+                .texto("Bienvenido")
+                .tipo("Bienvenida")
+                .asunto("Bienvenido")
+                .destino(register.getEmail())
+                .build();
+        kafkaProducterMailsSender.sendMail(correo);
         return createToken(registerMapper.RegisterToLoginDTO(datosGuardados));
 
     }
 
+    /**
+     * Este metodo se encarga de la creacion de un nuevo usuario
+     * @param registro Datos requeridos para el alta
+     * @return
+     */
     public ResponseEntity<String> createUser(@NonNull RegisterDTO registro) {
         return ResponseEntity.ok(createNewUser(registro));
     }

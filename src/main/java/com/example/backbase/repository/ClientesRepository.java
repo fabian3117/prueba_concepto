@@ -15,5 +15,6 @@ public interface ClientesRepository extends JpaRepository<ClienteModel,Long> {
     boolean existsByEmail(String email);
 
     List<ClienteModel> findByEmail(String email);
+    long countAllByEmail(String email);
     //--->  Al guardar deberia generar un token para enviar <---
 }

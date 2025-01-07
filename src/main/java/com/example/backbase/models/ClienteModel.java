@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @Entity
@@ -31,4 +32,6 @@ public class ClienteModel {
     //--->  userId del cliente  <---
     private Long userId;
     private String password;
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    List<ReservasModel> reservas;
 }
