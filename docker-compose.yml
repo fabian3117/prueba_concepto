@@ -64,6 +64,16 @@ services:
     ports:
       - "27017:27017"
 
+  redis:
+      image: redis:latest
+      container_name: redis_container_new
+      ports:
+        - "6379:6379"
+      environment:
+        - REDIS_PASSWORD :"1234Queso."
+      command: [ "redis-server", "--requirepass", "1234Queso." ]
+      restart: unless-stopped
+
 
 networks:
   mi_red:
